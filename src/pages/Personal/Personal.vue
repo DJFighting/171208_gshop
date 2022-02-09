@@ -23,7 +23,7 @@
     <section class="personal_info_data border-1px">
       <ul class="info_data_list">
         <a href="javascript:" class="info_data_link">
-          <span class="info_data_top"><span>0.00</span>元</span>
+          <span class="info_data_top"><span>{{userInfo.count}}</span>元</span>
           <span class="info_data_bottom">我的余额</span>
         </a>
         <a href="javascript:" class="info_data_link">
@@ -38,7 +38,7 @@
     </section>
     <section class="personal_my_order border-1px">
       <!-- 我的订单 -->
-      <a href='javascript:' class="my_order">
+      <a href='javascript:void' class="my_order" @click="toOrder">
         <span>
           <i class="iconfont icon-order-s"></i>
         </span>
@@ -61,13 +61,13 @@
           </span>
         </div>
       </a>
-      <!-- 硅谷外卖会员卡 -->
+      <!-- 懒人外卖会员卡 -->
       <a href="javascript:" class="my_order">
         <span>
           <i class="iconfont icon-vip"></i>
         </span>
         <div class="my_order_div">
-          <span>硅谷外卖会员卡</span>
+          <span>懒人外卖会员卡</span>
           <span class="my_order_icon">
             <i class="iconfont icon-jiantou1"></i>
           </span>
@@ -110,11 +110,14 @@
             Toast('登出成功')
             console.log(this.userInfo);
           })
+      },
+       toOrder() {
+        this.$router.push('/order')
       }
     },
     components: {
       HeaderTop
-    }
+    },
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>

@@ -4,7 +4,7 @@
     <form class="search_form" @submit.prevent="search">
       <input type="search" name="search" placeholder="请输入商家或美食名称" 
       class="search_input" v-model="keyword">
-      <input type="submit" class="search_submit">
+      <input type="submit" class="search_submit"  >
     </form>
     <section class="list" v-if="searchShops.length">
       <ul class="list_container">
@@ -43,15 +43,22 @@
     methods: {
       search () {
         // 得到搜索关键字，进行搜索
-        const keyword = this.keyword.trim()
-        if(this.keyword) {
-          this.$store.dispatch('searchShops',this.keyword)
+        const keyword = this.keyword.trim();
+        // keyword = encodeURI(this.keyword.trim());
+        if(keyword) {
+          this.$store.dispatch('searchShops',keyword)
         }
-        if(this.searchShops) {
-          this.emptyResult = true
-        } else {
-          this.emptyResult = false
-        }
+        // if(this.searchShops) {
+        //   this.emptyResult = true
+        // } else {
+        //   this.emptyResult = false
+        // }
+        
+          if(!this.searchShops) {
+            this.emptyResult = true
+          } else {
+            this.emptyResult = false
+          }
       }
     },
     computed: {

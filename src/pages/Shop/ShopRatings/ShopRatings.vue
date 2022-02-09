@@ -89,16 +89,17 @@ export default {
     return {
       onlyShowText: true, // 是否只显示有文本的评价内容
       selectType: 2, // 选择指定的评价类型：0为满意 1为不满意 2 为全部内容
+      id:this.$route.query.id
     };
   },
   mounted() {
-    this.$store.dispatch("getShopRatings", () => {
+    this.$store.dispatch("getShopRatings",{callback:() => {
       this.$nextTick(() => {
         new BScroll(".ratings", {
           click: true,
         });
       });
-    });
+    },id:this.id});
   },
   computed: {
     ...mapState(["info", "ratings"]),

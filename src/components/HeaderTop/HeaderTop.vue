@@ -2,7 +2,7 @@
   <header class="header">
      <slot name="left"></slot>
       <a class="header_title">
-        <span class="header_title_text ellipsis">{{title}}</span>
+        <span class="header_title_text ellipsis fa fa-map-marker">{{title}}</span>
       </a>
       <slot name="right"></slot>
     </header>

@@ -2,13 +2,13 @@
   <div class="home">
     <!--首页头部-->
     <HeaderTop :title="address.name">
-        <a class="header_search" slot="left">
+        <a class="header_search" slot="left" @click="$router.push('/search')">
        <i class="iconfont icon-sousuo"></i>
     </a>
     <!-- <a class="header_login" slot="right">
         
     </a> -->
-    <router-link class="header_login" slot="right" :to="userInfo._id ? '/userinfo' : '/login'">
+    <router-link class="header_login" slot="right" :to="userInfo._id ? '/personal' : '/login'">
     <span class="header_login_text" v-if="!userInfo._id">
       登录|注册
       </span>

@@ -107,17 +107,20 @@ export default {
     return {
       scrollY: 0, // 右侧滑动的Y周坐标 实时变化
       tops: [], // 所有左侧分类li的top组成的数组
-      food:{} // 需要显示的food
+      food:{}, // 需要显示的food
+      id:this.$route.query.id
     }
   },
   mounted () {
-    this.$store.dispatch('getShopGoods', () => {
+    console.log(this.id,1313131313);
+    this.$store.dispatch('getShopGoods',{callback:() => {
       this.$nextTick(() => {
         this.initScroll()
 
         this.initTops()
       })
-    })
+    },id:this.id})
+    
   },
   components: {
     CartControl,

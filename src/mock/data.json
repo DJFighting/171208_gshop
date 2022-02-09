@@ -1,6 +1,8 @@
-{
+
+ {
   "info": {
     "name": "嘉禾一品（温都水城）",
+    "shopId": 1,
     "description": "硅谷专送",
     "deliveryTime": 28,
     "score": 4.2,

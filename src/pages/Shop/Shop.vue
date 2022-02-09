@@ -4,10 +4,10 @@
       <shop-header/>
       <div class="tab">
         <div class="tab-item">
-          <router-link to="/shop/goods" replace>点餐</router-link>
+          <router-link :to="{path:'/shop/goods',query:{id:id}}" replace>点餐</router-link>
         </div>
         <div class="tab-item">
-          <router-link to="/shop/ratings" replace>评价</router-link>
+          <router-link :to="{path:'/shop/ratings',query:{id:id}}" replace>评价</router-link>
         </div>
         <div class="tab-item">
           <router-link to="/shop/info" replace>商家</router-link>
@@ -29,10 +29,17 @@ import ShopRatings from '../Shop/ShopRatings/ShopRatings.vue'
 import ShopInfo from '../Shop/ShopInfo/ShopInfo.vue'
 
 export default {
+  data() {
+    return {
+      id:this.$route.query.id
+    }
+  },
   mounted () {
-    this.$store.dispatch('getShopGoods')
-    this.$store.dispatch('getShopRatings')
-    this.$store.dispatch('getShopInfo')
+    console.log('***********',this.$route.query.id);
+    this.$store.dispatch('getShopGoods',{id:this.id})
+    this.$store.dispatch('getShopRatings',{id:this.id})
+    this.$store.dispatch('getShopInfo',this.id)
+
   },
   components: {
         ShopHeader,

@@ -78,17 +78,18 @@ export default {
     },
 
     // 异步获取商品信息 
-    async getShopGoods({commit}, callback) {
-        const result = await reqShopGoods()
+    async getShopGoods({commit},{callback,id}) {
+        const result = await reqShopGoods(id)
         if(result.code===0) {
             const goods = result.data
             commit(RECEIVE_GOODS,{goods})
             callback && callback()
+             
         }
     },
     // 异步获取商家评价信息
-    async getShopRatings({commit},callback) {
-        const result = await reqShopRatings()
+    async getShopRatings({commit},{callback,id}) {
+        const result = await reqShopRatings(id)
         if(result.code===0) {
             const ratings = result.data
             commit(RECEIVE_RATINGS,{ratings})
@@ -96,8 +97,8 @@ export default {
         }
     },
     // 异步获取商家信息
-    async getShopInfo({commit}) {
-        const result = await reqShopInfo()
+    async getShopInfo({commit},id) {
+        const result = await reqShopInfo(id)
         if(result.code===0) {
             const info = result.data
             commit(RECEIVE_INFO,{info})
