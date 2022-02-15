@@ -7,7 +7,7 @@
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name || '登录|注册'}}</p>
+          <p class="user-info-top" v-if="!userInfo.phone || (userInfo.name&&userInfo.phone)&&(userInfo.name!==userInfo.phone)">{{userInfo.name || '登录|注册'}}</p>
           <p>
             <span class="user-icon">
               <i class="iconfont icon-shouji icon-mobile"></i>
@@ -22,8 +22,8 @@
     </section>
     <section class="personal_info_data border-1px">
       <ul class="info_data_list">
-        <a href="javascript:" class="info_data_link">
-          <span class="info_data_top"><span>{{userInfo.count}}</span>元</span>
+        <a href="javascript:" class="info_data_link" @click.prevent="toMyCount">
+          <span class="info_data_top"><span>{{userInfo.count}}.00</span>元</span>
           <span class="info_data_bottom">我的余额</span>
         </a>
         <a href="javascript:" class="info_data_link">
@@ -113,11 +113,16 @@
       },
        toOrder() {
         this.$router.push('/order')
+      },
+      toMyCount() {
+        this.$router.push('/usercount')
       }
     },
     components: {
       HeaderTop
     },
+    mounted() {
+    }
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>

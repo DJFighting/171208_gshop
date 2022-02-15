@@ -65,7 +65,7 @@ import Star from '../Star/Star.vue'
 export default {
   data() {
     return {
-      baseImageUrl:'https://cangdu.org:8001/img/'
+      baseImageUrl:'http://elm.cangdu.org/img/'
     }
   },
   computed: {

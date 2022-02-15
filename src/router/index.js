@@ -8,6 +8,8 @@ import Home from '../pages/Home/Home.vue'
 import Search from '../pages/Search/Search.vue'
 import Order from '../pages/Order/Order.vue'
 import Personal from '../pages/Personal/Personal.vue'
+import PersonalInfo from '../pages/Personal/PersonalInfo/PersonalInfo.vue'
+import PersonalCount from '../pages/Personal/PersonalCount/PersonalCount.vue'
 import Login from '../pages/Login/Login.vue'
 import Shop from '../pages/Shop/Shop.vue'
 import ShopGoods from '../pages/Shop/ShopGoods/ShopGoods.vue'
@@ -53,6 +55,15 @@ export default new VueRouter({
             meta:{
                 showFooter:true
             }
+        },
+        {
+            path:'/userinfo',
+            component:PersonalInfo,
+
+        },
+        {
+            path:'/usercount',
+            component:PersonalCount
         },
         {
             path:'/shop',
