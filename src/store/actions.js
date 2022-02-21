@@ -10,7 +10,8 @@ import {
     INCREMENT_FOOD_COUNT,
     DECREMENT_FOOD_COUNT,
     CLEAR_CART,
-    RECEIVE_SEARCH_SHOPS
+    RECEIVE_SEARCH_SHOPS,
+    UPDATE_USER_ORDER
 } from './mutation-types'
 
 import {
@@ -116,6 +117,13 @@ export default {
     // 同步清空购物车 
     clearCart({commit}) {
         commit(CLEAR_CART)
+    },
+
+    // 同步更新用户订单
+    updateUserOrder({commit},order) {
+        if(order) {
+            commit(UPDATE_USER_ORDER,{order})
+        }
     },
     // 异步搜索商家信息
     async searchShops({commit, state}, keyword) {

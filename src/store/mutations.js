@@ -11,7 +11,8 @@ import {
     INCREMENT_FOOD_COUNT,
     DECREMENT_FOOD_COUNT,
     CLEAR_CART,
-    RECEIVE_SEARCH_SHOPS
+    RECEIVE_SEARCH_SHOPS,
+    UPDATE_USER_ORDER
 } from './mutation-types'
 
 export default {
@@ -54,6 +55,10 @@ export default {
                 state.cartFoods.splice(state.cartFoods.indexOf(food), 1)
             }
         }
+    },
+    [UPDATE_USER_ORDER] (state,{order}) {
+        const userorder = _.cloneDeep(order)
+        state.userOrder.push({...userorder})
     },
     [CLEAR_CART] (state) {
         // 清楚所以food中的count

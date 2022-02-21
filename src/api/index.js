@@ -39,4 +39,4 @@ export const reqShopRatings = (id) => ajax(BASEURL+'/ratings',{id})
 export const reqShopInfo = (id) => ajax(BASEURL+'/info',{id})
 
 //用户修改个人信息
-export const reqUpdateUserInfo = ({_id,name,phone,address}) => ajax(BASEURL+'/update',{_id,name,phone,address},'POST')
+export const reqUpdateUserInfo = ({_id,name,phone,address,imgUrl}) => ajax(BASEURL+'/update',{_id,name,phone,address,imgUrl},'POST')

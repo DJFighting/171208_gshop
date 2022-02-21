@@ -2,50 +2,14 @@
   <section class="order">
     <HeaderTop title="个人订单"></HeaderTop>
     <section class="order_no_login" v-if="userInfo.name">
-      <div v-if="cartFoods.length">
-        <!-- <table>
-          <th>
-            <td>商品名称</td>
-            <td>商品描述</td>
-            <td>商品数量</td>
-            <td>商品总价</td>
-          </th>
-          <tr v-for="(cartFood,index) in cartFoods" :key="index">
-            <td>{{cartFood.name}}</td>
-            <td>{{cartFood.description}}</td>
-            <td>{{cartFood.count}}</td>
-            <td>{{cartFood.price*cartFood.count}}</td>
-          </tr>
-        </table> -->
-        <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>商品名称</th>
-                  <th>商品描述</th>
-                  <th>商品数量</th>
-                  <th>商品总价</th>
-                </tr>
-              </thead>
-              <tbody>
-                  
-                  <tr v-for="(cartFood,index) in cartFoods" :key="index">
-                    <td>{{cartFood.name}}</td>
-                    <td>{{cartFood.description}}</td>
-                    <td>{{cartFood.count}}</td>
-                    <td>{{cartFood.price*cartFood.count}}</td>
-                  </tr>
-                 
-                
-              </tbody>
-            </table>
-          </div>
+      <div v-if="userOrder.length>0">
+        当前有订单
+        <div v-for="(order,index) of userOrder" :key="index">
+          第{{index+1}}个订单
+          <p v-for="(item,id) of order" :key="id">{{item.name+','+item.count}}</p>
+        </div>
       </div>
-      <div v-else>
-        <h3>当前暂无任何订单{{userInfo.name}}</h3>
-      <router-link to="/home"><button>去点餐</button></router-link>
-      </div>
-      
+      <div v-else>当前暂无订单</div>
     </section>
     <section class="order_no_login" v-else>
       <img src="./images/person.png">
@@ -60,7 +24,7 @@
   import {mapState} from 'vuex'
   export default {
     computed:{
-      ...mapState(['userInfo','cartFoods'])
+      ...mapState(['userInfo','cartFoods','userOrder'])
     },
     components:{
       HeaderTop

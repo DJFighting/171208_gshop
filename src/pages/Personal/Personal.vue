@@ -3,8 +3,9 @@
     <HeaderTop title="我的"></HeaderTop>
     <section class="personal-number">
       <router-link :to="userInfo._id ? '/userinfo' : '/login'" class="personal-link">
-        <div class="personal_image">
-          <i class="iconfont icon-person"></i>
+        <div class="personal_image" v-if="userInfo.name">
+          <!-- <i class="iconfont icon-person"></i> -->
+          <img :src="userInfo.imgUrl" style="width:100%;height:100%" alt="暂无头像">
         </div>
         <div class="user-info">
           <p class="user-info-top" v-if="!userInfo.phone || (userInfo.name&&userInfo.phone)&&(userInfo.name!==userInfo.phone)">{{userInfo.name || '登录|注册'}}</p>

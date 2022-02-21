@@ -8,7 +8,7 @@
     <section class="userimg">
       <span>头像</span>
       <div class="picture">
-        <img src="http://elm.cangdu.org/img/default.jpg" alt="" />
+        <img :src="imgUrl" alt="暂无头像" @click="updateImg" />
         <i class="iconfont icon-jiantou1"></i>
       </div>
     </section>
@@ -51,6 +51,7 @@ export default {
       name: "",
       phone: "",
       address: "",
+      imgUrl: "https://cdn.vuetifyjs.com/images/john.jpg",
     };
   },
   components: { HeaderTop },
@@ -61,6 +62,8 @@ export default {
     this.name = this.userInfo.name;
     this.phone = this.userInfo.phone;
     this.address = this.userInfo.address;
+    this.imgUrl = this.userInfo.imgUrl
+    console.log(this.imgUrl);
   },
   methods: {
     updateInfo() {
@@ -70,6 +73,7 @@ export default {
           name: this.name,
           phone: this.phone,
           address: this.address,
+          imgUrl:this.imgUrl
         });
         if (result.code == 0) {
           Toast("信息修改成功");
@@ -80,6 +84,27 @@ export default {
       });
     },
     ...mapActions(["getAddress", "getUserInfo"]),
+    updateImg() {
+      //创建input
+      const upload = document.createElement("input");
+      //设置type为file
+      upload.type = "file";
+      //类型
+      upload.accept = "image/png, image/jpeg";
+      //添加onchange事件
+      upload.onchange = this.setFile;
+      //模拟点击
+      upload.click();
+    },
+    setFile(e) {
+      //获取文件
+      const file = e.path[0].files[0];
+      //将其放入formdata中方便上传
+      const formData = new FormData();
+      formData.append("imgFile", file);
+      const ImgUrl = window.URL.createObjectURL(file);
+      this.imgUrl = ImgUrl;
+    }
   },
 };
 </script>

@@ -15,4 +15,6 @@
  export const CLEAR_CART = 'clear_cart' // 清空购物车
 
  export const RECEIVE_SEARCH_SHOPS = 'receive_search_shops'
+
+ export const UPDATE_USER_ORDER = 'update_user_order' // 更新用户当前订单
  
