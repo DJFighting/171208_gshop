@@ -61,7 +61,7 @@ export default {
         state.userOrder.push({...userorder})
     },
     [CLEAR_CART] (state) {
-        // 清楚所以food中的count
+        // 清除所有food中的count
         state.cartFoods.forEach(food => food.count = 0)
         // 清除购物车中所有食物
         state.cartFoods = []

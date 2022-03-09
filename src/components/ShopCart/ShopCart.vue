@@ -48,12 +48,14 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions} from "vuex";
 import CartControl from "../../components/CartControl/CartControl.vue";
 
 import BScroll from "better-scroll";
 
-import { MessageBox } from "mint-ui";
+import { MessageBox,Toast } from "mint-ui";
+
+import { reqUpdateUserOrder } from "../../api";
 export default {
   data() {
     return {
@@ -63,8 +65,11 @@ export default {
   components: {
     CartControl,
   },
+  mounted () {
+    this.getUserInfo()
+  },
   computed: {
-    ...mapState(["cartFoods", "info", "userInfo"]),
+    ...mapState(["cartFoods", "info", "userInfo",'userOrder']),
     ...mapGetters(["totalCount", "totalPrice"]),
     payClass() {
       const { totalPrice } = this;
@@ -101,6 +106,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["getAddress", "getUserInfo"]),
     toggleShow() {
       this.isShow = !this.isShow;
     },
@@ -110,11 +116,24 @@ export default {
       });
     },
     payFor() {
-      MessageBox.confirm("请提交您的订单").then((action) => {
+      debugger
+      MessageBox.confirm("请提交您的订单").then( async (action) => {
         if (this.userInfo.name) {
-          this.$store.dispatch('updateUserOrder',this.cartFoods)
+          // this.$store.dispatch('updateUserOrder',this.cartFoods)
+          console.log(this.userInfo.userOrder);
+          // let order = this.userInfo.userOrder
+          // let newOrder = order.push({...this.cartFoods})
+          this.userInfo.userOrder.push({...this.cartFoods})
+          debugger
+          let result = await reqUpdateUserOrder({
+          _id: this.userInfo._id,
+          userOrder: this.userInfo.userOrder
+        });
+         if (result.code ==0 ) {
+           Toast("订单提交成功！");
+         }
           this.$store.dispatch("clearCart");
-        } else {
+        } else {  
           MessageBox.confirm("请先登录").then((action) => {
             this.$router.push("/login");
           });

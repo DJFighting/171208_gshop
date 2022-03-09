@@ -51,7 +51,7 @@ export default {
       name: "",
       phone: "",
       address: "",
-      imgUrl: "https://cdn.vuetifyjs.com/images/john.jpg",
+      imgUrl:'',
     };
   },
   components: { HeaderTop },
@@ -62,8 +62,8 @@ export default {
     this.name = this.userInfo.name;
     this.phone = this.userInfo.phone;
     this.address = this.userInfo.address;
-    this.imgUrl = this.userInfo.imgUrl
-    console.log(this.imgUrl);
+    this.imgUrl = this.userInfo.imgUrl;
+    // console.log(this.imgUrl);
   },
   methods: {
     updateInfo() {
@@ -73,7 +73,7 @@ export default {
           name: this.name,
           phone: this.phone,
           address: this.address,
-          imgUrl:this.imgUrl
+          imgUrl: this.imgUrl,
         });
         if (result.code == 0) {
           Toast("信息修改成功");
@@ -98,13 +98,37 @@ export default {
     },
     setFile(e) {
       //获取文件
+      var reader = new FileReader();
+      var AllowImgFileSize = 2100000;
       const file = e.path[0].files[0];
+      let imgUrlBase64;
+      const _this = this;
       //将其放入formdata中方便上传
-      const formData = new FormData();
-      formData.append("imgFile", file);
-      const ImgUrl = window.URL.createObjectURL(file);
-      this.imgUrl = ImgUrl;
-    }
+      // const formData = new FormData();
+      // formData.append("imgFile", file);
+      if (file) {
+        //将文件以Data URL形式读入页面
+        imgUrlBase64 = reader.readAsDataURL(file);
+        // console.log(imgUrlBase64);
+        reader.onload = function (e) {
+          //var ImgFileSize = reader.result.substring(reader.result.indexOf(",") + 1).length;//截取base64码部分（可选可不选，需要与后台沟通）
+          if (
+            AllowImgFileSize != 0 &&
+            AllowImgFileSize < reader.result.length
+          ) {
+            alert("上传失败，请上传不大于2M的图片！");
+            return;
+          } else {
+            //执行上传操作
+            // alert(reader.result);
+            _this.imgUrl = reader.result;
+            // console.log(_this.imgUrl);
+          }
+        };
+      }
+      // const ImgUrl = window.URL.createObjectURL(file);
+      // this.imgUrl = ImgUrl;
+    },
   },
 };
 </script>
